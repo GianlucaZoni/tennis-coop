@@ -134,7 +134,7 @@ export class Racket {
 
         // rotation x tied to dy
         // rotation y tied to dx and dz
-        ball.dx = this.player * -Math.min(Math.abs(this.rotation.y) * 0.2, 0.8) * Math.random(1.0, 1.5);
+        ball.dx = this.player * -Math.min(Math.abs(this.rotation.y) * 0.3, 0.8) * Math.random(1.0, 1.5);
         ball.dz = this.rotation.y * -0.08 * Math.random(0.10, 0.12) * (Math.random() > 0.3 ? 1 : -1);
         ball.dy = Math.min(Math.abs(this.rotation.x) * 0.2, 0.03);
         // ball.dx = this.player * -Math.min(Math.abs(this.rotation.y) * 5, 0.8) * Math.random(1.0, 1.5);
@@ -168,18 +168,21 @@ export class Racket {
         // this.helper.updateMatrixWorld();
 
         // apply friction
-        this.dx *= 0.9;
-        this.dy *= 0.9;
-        this.dz *= 0.9;
-        this.rotation.x *= 0.8;
-        this.rotation.y *= 0.8;
-        this.rotation.z *= 0.8;
+        const friction = 0.95;
+        const frictionRotation = 0.8;
+        this.dx *= friction;
+        this.dy *= friction;
+        this.dz *= friction;
+        this.rotation.x *= frictionRotation;
+        this.rotation.y *= frictionRotation;
+        this.rotation.z *= frictionRotation;
 
         // read keyboard input
-        if (keyboard[this.controls.up]) this.dx += -0.008;
-        if (keyboard[this.controls.left]) this.dz += 0.008;
-        if (keyboard[this.controls.down]) this.dx += 0.008;
-        if (keyboard[this.controls.right]) this.dz += -0.008;
+        const acceleration = 0.005;
+        if (keyboard[this.controls.up]) this.dx -= acceleration;
+        if (keyboard[this.controls.left]) this.dz += acceleration;
+        if (keyboard[this.controls.down]) this.dx += acceleration;
+        if (keyboard[this.controls.right]) this.dz -= acceleration;
         
         this.charging = false;
         this.swinging = !Object.values(this.rotation).every(r => Math.abs(r) < 0.05);
@@ -190,13 +193,22 @@ export class Racket {
         }
 
         // movement
-        if (this.player == 1) {
-            this.x = Math.max(this.x + this.dx * dt, 6);
-        } else {
-            this.x = Math.min(this.x + this.dx * dt, -6);
-        }
-        
+        const maxX = 1;
+        const minX = -1;
+        const maxZ = 1;
+        const minZ = -1;
+
+        this.x += this.dx * dt;
         this.z += this.dz * dt;
+
+        // constrain movement within court boundaries
+        if (this.player == 1) {
+            this.x = Math.max(Math.min(this.x, maxX), 6);
+        } else {
+            this.x = Math.min(Math.max(this.x, minX), -6);
+        }
+        this.z = Math.max(Math.min(this.z, maxZ), minZ);
+
         this.model.position.set(this.x, this.y, this.z);
         
         // rotation

@@ -9,7 +9,8 @@ import { Racket } from "./src/Racket.js";
 import { Ball } from "./src/Ball";
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 
-let stats;
+const stats = new Stats();
+document.body.appendChild(stats.dom);
 
 const sm = new SceneManager();
 const scene = sm.scene;
@@ -26,10 +27,11 @@ const court = new Court(scene);
 const net = new Net(scene, loader);
 const ball = new Ball(scene);
 
-const player1Position = { x: 20, y: 2.5, z: 0 };
-const player2Position = { x: -20, y: 2.5, z: 0 };
+const player1Position = { x: 25, y: 2.5, z: 0 };
+const player2Position = { x: -25, y: 2.5, z: 0 };
 const player1Controls = { up: "w", left: "a", down: "s", right: "d", swing: " " };
-const player2Controls = { up: "ArrowUp", left: "ArrowLeft", down: "ArrowDown", right: "ArrowRight", swing: "Enter" };
+// const player2Controls = { up: "ArrowUp", left: "ArrowLeft", down: "ArrowDown", right: "ArrowRight", swing: "Enter" };
+const player2Controls = { up: "ArrowDown", left: "ArrowRight", down: "ArrowUp", right: "ArrowLeft", swing: "Enter" };
 const player1 = new Racket(scene, loader, player1Position, 1, player1Controls);
 const player2 = new Racket(scene, loader, player2Position, -1, player2Controls);
 
@@ -97,6 +99,8 @@ function animate(timestamp) {
     
     requestAnimationFrame(animate);
     sm.render();
+    stats.update();
+
 }
 
 animate();

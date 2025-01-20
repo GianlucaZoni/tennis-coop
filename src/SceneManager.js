@@ -4,13 +4,9 @@ import Stats from 'three/examples/jsm/libs/stats.module.js';
 export class SceneManager {
     constructor() {
 
-        let stats;
-
         // scene
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0xa7e677);
-
-        const container = document.getElementById('court');
 
         // Splitscreen camera
         this.views = [
@@ -49,9 +45,6 @@ export class SceneManager {
         this.renderer = new THREE.WebGLRenderer({ canvas: document.querySelector("#court") });
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-
-        stats = new Stats();
-        container.appendChild(stats.dom);
 
         // lighting
         const ambientLight = new THREE.AmbientLight(0xffffff);
