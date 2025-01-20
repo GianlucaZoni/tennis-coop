@@ -53,7 +53,7 @@ export class SceneManager {
         // helpers
         const gridHelper = new THREE.GridHelper(200, 50);
         const axesHelper = new THREE.AxesHelper(15);
-        this.scene.add(gridHelper, axesHelper);
+        //this.scene.add(gridHelper, axesHelper);
     }
 
     resize() {
