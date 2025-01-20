@@ -8,9 +8,22 @@ import { Net } from "./src/Net";
 import { Racket } from "./src/Racket.js";
 import { Ball } from "./src/Ball";
 import Stats from 'three/examples/jsm/libs/stats.module.js';
+import GUI from 'lil-gui';
 
 const stats = new Stats();
 document.body.appendChild(stats.dom);
+
+/*
+const gui = new GUI();
+//const friction = gui.add("friction", 0.99, 0, 1, 0.01);
+const guiFriction = {Friction: 0.99};
+const guiAcceleration = {Acceleration: 0.002};
+
+gui.add(guiFriction, "Friction", 0, 1, 0.01);
+gui.add(guiAcceleration, "Acceleration", 0, 1, 0.001);
+*/
+
+
 
 const sm = new SceneManager();
 const scene = sm.scene;

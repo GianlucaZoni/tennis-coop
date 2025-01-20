@@ -2,12 +2,15 @@ import * as THREE from "three";
 import redRacketData from "../models/racket_red.glb?url";
 import blueRacketData from "../models/racket_blue.glb?url";
 
+import GUI from 'lil-gui';
+
 const hitSound = new Audio("../sounds/hit.mp3");
 const swingSound = new Audio("../sounds/swing.mp3");
 swingSound.volume = 0.25;
 
 export class Racket {
     constructor(scene, loader, position, player, controls) {
+        
         this.scene = scene;
         this.loader = loader;
         this.model = undefined;
@@ -18,6 +21,17 @@ export class Racket {
         // player is 1 or -1 so certain values can be inverted
         this.player = player;
         this.controls = controls;
+        //this.guiFriction = guiFriction;
+        //this.guiAcceleration = guiAcceleration;
+
+        /*
+        const gui = new GUI();
+        //const friction = gui.add("friction", 0.99, 0, 1, 0.01);
+        this.guiParams = {friction: 0.99, acceleration: 0.002};
+        
+        gui.add(this.guiParams, "Friction", 0, 1, 0.01);
+        gui.add(this.guiParams, "Acceleration", 0, 1, 0.001);
+        */
 
         this.x = position.x;
         this.y = position.y;
@@ -168,7 +182,8 @@ export class Racket {
         // this.helper.updateMatrixWorld();
 
         // apply friction
-        const friction = .98;
+        const friction = 0.9;
+        //const friction = this.guiParams.friction;
         const frictionRotation = 0.8;
         this.dx *= friction;
         this.dy *= friction;
@@ -179,6 +194,7 @@ export class Racket {
 
         // read keyboard input
         const acceleration = 0.01;
+        //const acceleration = this.guiParams.acceleration;
         if (keyboard[this.controls.up]) this.dx -= acceleration;
         if (keyboard[this.controls.left]) this.dz += acceleration;
         if (keyboard[this.controls.down]) this.dx += acceleration;
