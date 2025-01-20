@@ -76,7 +76,7 @@ export class Ball {
             this.y = 0.5;
             this.dy *= -0.95; 
             bounceSound.currentTime = 0;
-            bounceSound.play();
+            //bounceSound.play();
         }
         
         // invisible walls 
@@ -85,7 +85,7 @@ export class Ball {
         if (Math.abs(this.z) > 24) {
             this.dz *= -1;
             bounceSound.currentTime = 0;
-            bounceSound.play();
+            //bounceSound.play();
         }
         
         // check out of bounds

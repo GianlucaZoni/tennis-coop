@@ -7,13 +7,19 @@ import { Court } from "./src/Court.js";
 import { Net } from "./src/Net";
 import { Racket } from "./src/Racket.js";
 import { Ball } from "./src/Ball";
+import Stats from 'three/examples/jsm/libs/stats.module.js';
+
+let stats;
 
 const sm = new SceneManager();
 const scene = sm.scene;
-const camera = sm.camera;
+//const camera = sm.camera;
+//const camera1 = sm.camera1;
+//const camera2 = sm.camera2;
 const renderer = sm.renderer;
 
-const controls = new OrbitControls(camera, renderer.domElement);
+//const controls1 = new OrbitControls(camera1, renderer.domElement);
+//const controls2 = new OrbitControls(camera2, renderer.domElement);
 const loader = new GLTFLoader();
 
 const court = new Court(scene);
@@ -87,9 +93,11 @@ function animate(timestamp) {
     ball.update(net, player1, player2, dt);
     player1.update(keyboard, ball, dt);
     player2.update(keyboard, ball, dt);
-    renderer.render(scene, camera);
+    //renderer.render(scene, camera);
     
     requestAnimationFrame(animate);
+    sm.render();
 }
 
 animate();
+//stats.update();
