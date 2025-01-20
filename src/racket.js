@@ -178,7 +178,7 @@ export class Racket {
         this.rotation.z *= frictionRotation;
 
         // read keyboard input
-        const acceleration = 0.1;
+        const acceleration = 0.01;
         if (keyboard[this.controls.up]) this.dx -= acceleration;
         if (keyboard[this.controls.left]) this.dz += acceleration;
         if (keyboard[this.controls.down]) this.dx += acceleration;
