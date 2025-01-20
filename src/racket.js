@@ -168,7 +168,7 @@ export class Racket {
         // this.helper.updateMatrixWorld();
 
         // apply friction
-        const friction = 0.95;
+        const friction = .98;
         const frictionRotation = 0.8;
         this.dx *= friction;
         this.dy *= friction;
@@ -178,7 +178,7 @@ export class Racket {
         this.rotation.z *= frictionRotation;
 
         // read keyboard input
-        const acceleration = 0.002;
+        const acceleration = 0.1;
         if (keyboard[this.controls.up]) this.dx -= acceleration;
         if (keyboard[this.controls.left]) this.dz += acceleration;
         if (keyboard[this.controls.down]) this.dx += acceleration;
