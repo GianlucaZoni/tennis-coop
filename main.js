@@ -19,7 +19,7 @@ const scene = sm.scene;
 //const camera2 = sm.camera2;
 const renderer = sm.renderer;
 
-//const controls1 = new OrbitControls(camera1, renderer.domElement);
+//const controls = new OrbitControls(camera, renderer.domElement);
 //const controls2 = new OrbitControls(camera2, renderer.domElement);
 const loader = new GLTFLoader();
 

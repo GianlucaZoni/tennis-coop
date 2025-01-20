@@ -178,7 +178,7 @@ export class Racket {
         this.rotation.z *= frictionRotation;
 
         // read keyboard input
-        const acceleration = 0.005;
+        const acceleration = 0.002;
         if (keyboard[this.controls.up]) this.dx -= acceleration;
         if (keyboard[this.controls.left]) this.dz += acceleration;
         if (keyboard[this.controls.down]) this.dx += acceleration;
@@ -193,13 +193,15 @@ export class Racket {
         }
 
         // movement
-        const maxX = 1;
-        const minX = -1;
-        const maxZ = 1;
-        const minZ = -1;
 
         this.x += this.dx * dt;
         this.z += this.dz * dt;
+
+        /*
+        const maxX = 360;
+        const minX = -360;
+        const maxZ = 360;
+        const minZ = -360;
 
         // constrain movement within court boundaries
         if (this.player == 1) {
@@ -207,7 +209,7 @@ export class Racket {
         } else {
             this.x = Math.min(Math.max(this.x, minX), -6);
         }
-        this.z = Math.max(Math.min(this.z, maxZ), minZ);
+        this.z = Math.max(Math.min(this.z, maxZ), minZ); */
 
         this.model.position.set(this.x, this.y, this.z);
         
